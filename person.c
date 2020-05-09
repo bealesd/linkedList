@@ -3,7 +3,7 @@
 
 PERSON *newPerson(char *fisrtName, char *lastName, int age)
 {
-    PERSON *person = malloc(sizeof(PERSON));
+    PERSON *person = calloc(1, sizeof(PERSON));
     person->fisrtName = strdup(fisrtName);
     person->lastName = strdup(lastName);
     person->age = age;
@@ -13,7 +13,7 @@ PERSON *newPerson(char *fisrtName, char *lastName, int age)
 node_t *newList(PERSON *person)
 {
     node_t *head = NULL;
-    head = (node_t *)malloc(sizeof(node_t));
+    head = (node_t *)calloc(1, sizeof(node_t));
     if (head == NULL)
     {
         return 1;
@@ -32,7 +32,7 @@ void append(node_t *head, PERSON *person)
         current = current->next;
     }
 
-    current->next = (node_t *)malloc(sizeof(node_t));
+    current->next = (node_t *)calloc(1, sizeof(node_t));
     current->next->person = person;
     current->next->next = NULL;
 }
@@ -40,7 +40,7 @@ void append(node_t *head, PERSON *person)
 void insertStart(node_t **head, PERSON *person)
 {
     node_t *new_node;
-    new_node = (node_t *)malloc(sizeof(node_t));
+    new_node = (node_t *)calloc(1, sizeof(node_t));
 
     new_node->person = person;
     new_node->next = *head;
