@@ -67,15 +67,16 @@ int remove_first(node_t **head)
 
 void removePerson(node_t **head, PERSON *person)
 {
-    printf("\nAddress to remove: %p\n", person);
+    printf("\nRemoving Person:\n");
+    printPerson(person);
 
     node_t *current = *head;
-    node_t *temp_node = NULL;
-    // node_t *previous = NULL;
+    printPerson(current->person);
 
     //check if first record matches person
     if (current->person == person)
     {
+        printf("\nFirst if\n");
         node_t *next_node = NULL;
         next_node = (*head)->next;
         free(*head);
@@ -83,18 +84,18 @@ void removePerson(node_t **head, PERSON *person)
         return;
     }
     //does next node match
+    // if not role next node forward
     while (current->next->person != person)
     {
-        current = temp_node->next;
+        current = current->next;
     }
 
+    // printf("\nAfter while\n");
     //theres a match on the next node
     if (current->next->person == person)
     {
-        printf("\nA match.\n");
-        temp_node = current;
-        temp_node->next = current->next->next;
-        free(current->next);
+        node_t *temp_node;
+        temp_node = current->next;
         current->next = temp_node->next;
         free(temp_node);
     }
@@ -122,6 +123,8 @@ void remove_last(node_t *head)
 
 void print_list(node_t *head)
 {
+    printf("\nPrint Persons:\n");
+
     node_t *current = head;
 
     while (current != NULL)

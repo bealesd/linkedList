@@ -1,5 +1,4 @@
 // cl main.c mathHelper.c person.c
-// in developer cmd
 
 #include <stdio.h>
 
@@ -22,17 +21,18 @@ int main(void)
 
     PERSON *elvis = newPerson("elvis", "presley", 44);
     insertStart(&people, elvis);
-    
+    printf("\nFirst name: %s\n", people->person->fisrtName);
+
     // print_list(people);
     removePerson(&people, joe);
-    
+    removePerson(&people, michael);
+
     print_list(people);
 
     // PERSON *found = getPerson(people, 1);
     // printPerson(found);
     // PERSON *found2 = getPerson(people, 0);
     // printPerson(found2);
-
 
     // int y = addFive(3);
     // printf("%d\n", y);
