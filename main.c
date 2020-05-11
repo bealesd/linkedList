@@ -7,6 +7,8 @@
 
 int main(void)
 {
+    system("cls");
+
     PERSON *davey = newPerson("davey", "jones", 45);
     node_t *people = newList(davey);
 

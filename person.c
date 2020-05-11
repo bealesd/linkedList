@@ -3,9 +3,9 @@
 
 PERSON *newPerson(char *fisrtName, char *lastName, int age)
 {
-    PERSON *person = calloc(1, sizeof(PERSON));
-    person->fisrtName = strdup(fisrtName);
-    person->lastName = strdup(lastName);
+    PERSON *person = (PERSON *)calloc(1, sizeof(PERSON));
+    person->fisrtName = (char *)strdup(fisrtName);
+    person->lastName = (char *)strdup(lastName);
     person->age = age;
     return person;
 }
@@ -14,11 +14,6 @@ node_t *newList(PERSON *person)
 {
     node_t *head = NULL;
     head = (node_t *)calloc(1, sizeof(node_t));
-    if (head == NULL)
-    {
-        return 1;
-    }
-
     head->person = person;
     head->next = NULL;
     return head;
@@ -67,19 +62,19 @@ int remove_first(node_t **head)
 
 void removePerson(node_t **head, PERSON *person)
 {
-    printf("\nRemoving Person:\n");
+    printf("\n\nRemoving Person:");
+    printf("\n");
     printPerson(person);
 
     node_t *current = *head;
-    printPerson(current->person);
 
     //check if first record matches person
     if (current->person == person)
     {
-        printf("\nFirst if\n");
         node_t *next_node = NULL;
         next_node = (*head)->next;
         free(*head);
+        printf("\n\nPerson at address: %p, removed!", person);
         *head = next_node;
         return;
     }
@@ -90,13 +85,13 @@ void removePerson(node_t **head, PERSON *person)
         current = current->next;
     }
 
-    // printf("\nAfter while\n");
     //theres a match on the next node
     if (current->next->person == person)
     {
         node_t *temp_node;
         temp_node = current->next;
         current->next = temp_node->next;
+        printf("\n\nPerson at address: %p, removed!", person);
         free(temp_node);
     }
 }
@@ -123,12 +118,13 @@ void remove_last(node_t *head)
 
 void print_list(node_t *head)
 {
-    printf("\nPrint Persons:\n");
+    printf("\n\nPrint Persons:");
 
     node_t *current = head;
 
     while (current != NULL)
     {
+        printf("\n");
         printPerson(current->person);
         current = current->next;
     }
@@ -196,11 +192,11 @@ PERSON *getPerson(node_t *head, int index)
 
 void printPerson(PERSON *person)
 {
-    printf("\nFirst name: %s\n", person->fisrtName);
-    printf("Last name: %s\n", person->lastName);
-    printf("Age: %d\n", person->age);
+    printf("\nFirst name: %s.", person->fisrtName);
+    printf("\nLast name: %s.", person->lastName);
+    printf("\nAge: %d.", person->age);
 
-    printf("Address in memory: %p\n", person);
+    printf("\nAddress in memory: %p.", person);
 }
 
 //   user person codde
