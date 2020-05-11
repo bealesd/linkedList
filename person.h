@@ -9,15 +9,8 @@ typedef struct
     char *fisrtName;
     char *lastName;
     int age;
-    // int num;
 
 } PERSON;
-
-// typedef struct list
-// {
-//   PERSON *person;
-//   struct list *next;
-// } list;
 
 typedef struct node
 {
@@ -43,9 +36,6 @@ PERSON *getPerson(node_t *head, int index);
 
 PERSON *newPerson(char *fisrtName, char *lastName, int age);
 
-// PERSON *newPerson(char *fisrtName, char *lastName, int age);
-// void addPerson(PERSON *person);
-// PERSON *getPerson(int num);
-// list *getPersonByAge(int age);
+int countPeople(node_t *head);
 
 void printPerson(PERSON *person);

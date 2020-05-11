@@ -62,9 +62,11 @@ int remove_first(node_t **head)
 
 void removePerson(node_t **head, PERSON *person)
 {
-    printf("\n\nRemoving Person:");
-    printf("\n");
-    printPerson(person);
+    //guard
+    if (person == NULL)
+    {
+        return;
+    }
 
     node_t *current = *head;
 
@@ -74,26 +76,85 @@ void removePerson(node_t **head, PERSON *person)
         node_t *next_node = NULL;
         next_node = (*head)->next;
         free(*head);
-        printf("\n\nPerson at address: %p, removed!", person);
         *head = next_node;
         return;
     }
-    //does next node match
-    // if not role next node forward
-    while (current->next->person != person)
+
+    // guard, if one person left, no match.
+    int length = countPeople(current);
+    int count = 1;
+    if (length == 1)
     {
-        current = current->next;
+        return;
     }
 
-    //theres a match on the next node
+    // does next node match
+    // if not role next node forward
+    while (count < length && current->next->person != person)
+    {
+        printf("\nCount: %d.", count);
+        current = current->next;
+        count++;
+    }
+
+    // theres a match on the next node
     if (current->next->person == person)
     {
         node_t *temp_node;
         temp_node = current->next;
         current->next = temp_node->next;
-        printf("\n\nPerson at address: %p, removed!", person);
         free(temp_node);
     }
+    // there was no macth
+    return;
+}
+
+int countPeople(node_t *head)
+{
+    int length;
+    node_t *current = head;
+    if (current == NULL || current->person == NULL)
+    {
+        length = 0;
+    }
+    else
+    {
+        length = 1;
+    }
+    while (current->next != NULL)
+    {
+        current = current->next;
+        length++;
+    }
+    return length;
+}
+
+PERSON *getPerson(node_t *head, int index)
+{
+    //guards
+    if (index < 0)
+    {
+        return NULL;
+    }
+    //check list length
+    int length = countPeople(head);
+    if (index + 1 > length)
+    {
+        return NULL;
+    }
+
+    node_t *current = head;
+
+    if (index == 0)
+    {
+        return current->person;
+    }
+
+    for (int i = 0; i < index; i++)
+    {
+        current = current->next;
+    }
+    return current->person;
 }
 
 void remove_last(node_t *head)
@@ -104,7 +165,7 @@ void remove_last(node_t *head)
         free(head);
     }
 
-    /* get to the second to last node in the list */
+    /* get the second to last node in the list */
     node_t *current = head;
     while (current->next->next != NULL)
     {
@@ -118,6 +179,7 @@ void remove_last(node_t *head)
 
 void print_list(node_t *head)
 {
+    printf("\n\n-------------------");
     printf("\n\nPrint Persons:");
 
     node_t *current = head;
@@ -128,75 +190,23 @@ void print_list(node_t *head)
         printPerson(current->person);
         current = current->next;
     }
+    printf("\n-------------------");
 }
-
-PERSON *getPerson(node_t *head, int index)
-{
-    int count = 0;
-    node_t *current = head;
-
-    if (index == 0)
-    {
-        return current->person;
-    }
-
-    while (current->next != NULL)
-    {
-        current = current->next;
-        if (index == ++count)
-        {
-            return current->person;
-        }
-    }
-
-    return NULL;
-}
-
-// list *getPersonByAge(int age)
-// {
-//     //create new list for results
-//     list *personsByAge = malloc(sizeof(list));
-//     personsByAge->next = NULL;
-//     personsByAge->person = NULL;
-
-//     list *nextElement = PERSONS;
-//     while (nextElement != NULL)
-//     {
-//         printf("\nIn age: age: %d\n", nextElement->person->age);
-//         if (nextElement->person->age == age)
-//         {
-//             printf("\nIn age: First name: %s\n", nextElement->person->fisrtName);
-//             //append to results
-//             if (personsByAge->next == NULL)
-//             {
-//                 personsByAge->person = nextElement->person;
-//             }
-//             else
-//             {
-//                 personsByAge->next = nextElement->person;
-//                 personsByAge = personsByAge->next;
-//             }
-//         }
-//         nextElement = nextElement->next;
-//     }
-//     //return NULL if list is empty
-//     if (personsByAge->person == NULL)
-//     {
-//         return NULL;
-//     }
-//     else
-//     {
-//         return personsByAge;
-//     }
-// }
 
 void printPerson(PERSON *person)
 {
-    printf("\nFirst name: %s.", person->fisrtName);
-    printf("\nLast name: %s.", person->lastName);
-    printf("\nAge: %d.", person->age);
+    if (person != NULL)
+    {
+        printf("\nFirst name: %s.", person->fisrtName);
+        printf("\nLast name: %s.", person->lastName);
+        printf("\nAge: %d.", person->age);
 
-    printf("\nAddress in memory: %p.", person);
+        printf("\nAddress in memory: %p.", person);
+    }
+    else
+    {
+        printf("\nPerson is null.");
+    }
 }
 
 //   user person codde

@@ -18,23 +18,27 @@ int main(void)
     PERSON *michael = newPerson("michael", "jackson", 50);
     append(people, michael);
 
-    // remove_first(&people);
-    // remove_last(people);
-
     PERSON *elvis = newPerson("elvis", "presley", 44);
     insertStart(&people, elvis);
-    printf("\nFirst name: %s\n", people->person->fisrtName);
 
-    // print_list(people);
-    removePerson(&people, joe);
-    removePerson(&people, michael);
+    if (1 == 1)
+    {
+        remove_first(&people);
+        remove_last(people);
 
-    print_list(people);
+        print_list(people);
 
-    // PERSON *found = getPerson(people, 1);
-    // printPerson(found);
-    // PERSON *found2 = getPerson(people, 0);
-    // printPerson(found2);
+        removePerson(&people, joe);
+
+        removePerson(&people, elvis);
+
+        print_list(people);
+    }
+
+    PERSON *found = getPerson(people, 0);
+    printf("\n\n-------------------");
+    printPerson(found);
+    printf("\n-------------------");
 
     // int y = addFive(3);
     // printf("%d\n", y);
