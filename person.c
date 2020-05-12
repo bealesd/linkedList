@@ -1,5 +1,8 @@
-#include "person.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "person.h"
 
 PERSON *newPerson(char *fisrtName, char *lastName, int age)
 {
