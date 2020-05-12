@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc.exe build file",
+            "command": "C:\\MinGW64\\bin\\gcc.exe",
+          
+            "args": [
+                "-g",
+                "${workspaceFolder}\\main.c",
+                "${workspaceFolder}\\generic.c",
+                "${workspaceFolder}\\person.c",
+                "-o${workspaceFolder}\\main.exe"
+            ],
+            "options": {
+                "cwd": "C:\\MinGW64\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
