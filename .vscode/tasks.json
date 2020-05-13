@@ -10,7 +10,6 @@
                 "-g",
                 "${workspaceFolder}\\main.c",
                 "${workspaceFolder}\\generic.c",
-                "${workspaceFolder}\\person.c",
                 "-o${workspaceFolder}\\main.exe"
             ],
             "options": {

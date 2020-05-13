@@ -1,27 +1,24 @@
 #ifndef GENERIC_H_ /* Guard for it already being defined. */
 #define GENERIC_H_
 
-typedef struct Game
-{
-    char *name;
-    int year;
-} Game;
-
-typedef struct g_node
+typedef struct node
 {
     void *object;
-    struct g_node *next;
-    struct g_node *previous;
-} t_node;
+    struct node *next;
+} node;
 
-t_node *newListOfObject(void *object);
+node *newListOfObject(void *object);
 
-void appendObject(t_node *head, void *object);
+void appendObject(node **head, void *object);
 
-void *getObject(t_node *head, int index);
+void *getObject(node *head, int index);
 
-int countObject(t_node *head);
+int countObject(node *head);
 
-void removeObject(t_node **head, void *object);
+void removeObject(node **head, void *object);
+
+void removeObjectAtIndex(node **head, int index);
+
+void removeObjectLast(node **head);
 
 #endif
